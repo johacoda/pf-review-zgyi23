@@ -1,0 +1,495 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light dark"><link rel="preload" href="fonts/inter.e379f284.woff2" as="font" type="font/woff2" crossorigin><title>True or trap · Diabetes mellitus · patandfam</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><meta name="description" content="Diabetes mellitus. 15 statements. Is each one true, or a trap?"><link rel="stylesheet" href="app.ce30315860.css"><style>
+.home{max-width:720px}
+.hm-video{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--r);background:#fff;margin:0 0 var(--s-xl);
+  border:var(--bw-line) solid var(--hairline)}
+.hm-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-xs)}
+.hm-mod{display:flex;align-items:center;gap:var(--s-sm);padding:var(--s-sm) var(--s-md);
+  border:var(--bw-line) solid var(--hairline);border-radius:var(--r);background:var(--surface)}
+.hm-t{flex:1 1 auto;min-width:0;font-size:var(--t-16)}
+.hm-mod.on{text-decoration:none;color:var(--ink);border-color:var(--ink-faint)}
+.hm-mod.on .hm-t{font-weight:var(--w-bold)}
+.hm-mod.on:hover{border-color:var(--primary);box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.hm-dots{display:flex;gap:4px}
+.hm-dot{width:8px;height:8px;border-radius:50%}
+.hm-go{color:var(--primary);font-size:var(--t-14);font-weight:var(--w-mid)}
+.hm-go::after{content:" →"}
+.hm-mod.off{background:var(--canvas-soft);border-color:transparent;color:var(--ink-faint)}
+.hm-soon{font-size:var(--t-13);color:var(--ink-muted)}
+
+:root{--brand:var(--primary)}
+/* accounts: the top-bar button and the sign-in panel */
+.acct-b{flex:none;font-family:inherit;font-weight:inherit;font-weight:var(--w-bold);
+  border:var(--bw-line) solid var(--hairline);background:var(--surface);color:var(--ink);cursor:pointer;margin-right:var(--s-xs);
+  transition:border-color .18s,color .18s}
+.acct-b:hover{border-color:var(--brand);color:var(--brand)}
+.acct-b.in{display:grid;place-items:center;background:var(--brand);color:var(--on-fill);border-color:var(--brand)}
+.acct-b.in:hover{color:var(--on-fill);opacity:.9}
+/* phones: the top bar has room for the logo and three buttons, not the breadcrumb too */
+@media (max-width:560px){
+  .topbar{gap:6px;padding-left:12px;padding-right:12px}
+  .topbar .crumb{display:none}
+  .acct-b{}
+  #expb{}
+}
+.acct-wrap{position:fixed;inset:0;z-index:96;background:rgba(10,10,12,0);display:grid;place-items:center;padding:var(--s-md);
+  transition:background .2s}
+.acct-wrap.in{background:rgba(10,10,12,.5)}
+.acct-wrap[hidden]{display:none}
+.acct{position:relative;width:min(420px,100%);background:var(--surface);border:var(--bw-line) solid var(--hairline);
+  border-radius:var(--r-2xl);box-shadow:0 24px 60px rgba(0,0,0,.25);padding:28px 28px 24px;opacity:0;transform:translateY(12px) scale(.98);
+  transition:opacity .2s,transform .2s;max-height:calc(100vh - 32px);overflow-y:auto}
+.acct-wrap.in .acct{opacity:1;transform:none}
+.acct-x{position:absolute;top:14px;right:14px}
+.acct-logo{display:flex;color:var(--ink);margin-bottom:18px}.acct-logo svg{height:18px;width:auto}
+.acct h2{font-size:var(--t-22);letter-spacing:-.01em;margin:0 0 6px;border:0;padding:0}
+.acct-t{margin:0 0 20px;color:var(--ink-2);font-size:var(--t-15);line-height:1.5}
+.acct-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font-family:inherit;font-weight:inherit;
+  font-weight:var(--w-bold);border:var(--bw-line) solid var(--hairline);background:var(--surface);
+  color:var(--ink);cursor:pointer;transition:border-color .18s,background .18s}
+.acct-google:hover{border-color:var(--ink-faint);background:var(--canvas-soft)}
+.acct-google svg{width:18px;height:18px}
+.acct-gnote{font-size:var(--t-12);line-height:1.45;color:var(--ink-muted);text-align:center;margin:8px 0 0}
+.acct-or{display:flex;align-items:center;gap:var(--s-sm);color:var(--ink-muted);font-size:var(--t-14);margin:var(--s-md) 0}
+.acct-or::before,.acct-or::after{content:"";flex:1;height:1px;background:var(--hairline)}
+.acct form{display:grid;gap:6px}
+.acct-l{font-size:var(--t-14);font-weight:var(--w-mid);color:var(--ink-2);margin-top:6px}
+.acct-l:first-child{margin-top:0}
+.acct-l[hidden],.acct select[hidden]{display:none}
+.acct input,.acct select{font-family:inherit;font-weight:inherit;
+  border:var(--bw-line) solid var(--hairline);background-color:var(--canvas);color:var(--ink);width:100%}
+.acct select{padding-right:40px}
+
+.acct form .vv-go{width:100%;margin-top:8px}
+.acct .vv-go:disabled{opacity:.6;cursor:default}
+.acct-msg{font-size:var(--t-14);margin:10px 0 0;color:var(--wrong)}
+.acct-fine{margin:18px 0 0;font-size:var(--t-14);color:var(--ink-muted);text-align:center}
+.acct-fine a{color:var(--ink-2)}
+.acct-sent{text-align:center}
+.acct-ic{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 14px;border-radius:50%;
+  background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand)}
+.acct-ic svg{width:26px;height:26px}
+.acct-sent b{color:var(--ink);word-break:break-all}
+.acct-row{display:flex;align-items:center;justify-content:space-between;gap:var(--s-sm);margin-top:14px}
+.acct form .acct-row .vv-go{width:auto;margin:0}
+.acct-me{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.acct-me h2{margin:0;font-size:var(--t-20)}
+.acct-av{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--brand);
+  color:var(--on-fill);font-weight:var(--w-bold);font-size:var(--t-20)}
+.acct-email{margin:2px 0 0;color:var(--ink-muted);font-size:var(--t-14);word-break:break-all}
+.acct-ok{display:flex;align-items:center;gap:8px;margin:0 0 18px;font-size:var(--t-14);color:var(--ink-2);
+  background:var(--canvas-soft);border-radius:var(--r-lg);padding:10px 14px}
+.acct-ok::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--correct);flex:none}
+.acct-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acct-sec{font-family:inherit;font-weight:inherit;font-weight:var(--w-mid);
+  border:var(--bw-line) solid var(--hairline);background:var(--surface);color:var(--ink);cursor:pointer}
+.acct-sec:hover{border-color:var(--brand);color:var(--brand)}
+.acct-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:14px;
+  border-top:var(--bw-hair) solid var(--hairline);font-size:var(--t-13)}
+.acct-foot a{color:var(--ink-muted)}
+.acct-del{color:var(--wrong);font-size:var(--t-13)}
+@media (max-width:560px){
+  .acct-wrap{place-items:end center;padding:0}
+  .acct{width:100%;border-radius:var(--r-2xl) var(--r-2xl) 0 0;border-bottom:0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(40px)}
+  .acct::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:var(--r-xs);background:var(--hairline)}
+}
+@media (prefers-reduced-motion:reduce){.acct,.acct-wrap{transition:none}}
+.su-go{width:100%;margin-top:var(--s-xs)}
+/* privacy and terms: a contents list beside the text, sections divided off, a comfortable line */
+.pv-page{max-width:1040px;margin:0 auto;padding:clamp(40px,7vw,72px) var(--s-md) var(--s-xl)}
+.pv-page h1{font-size:var(--t-d1);letter-spacing:-.03em;margin:0 0 6px}
+.pv-up{color:var(--ink-muted);font-size:var(--t-14);margin:0 0 clamp(24px,4vw,40px)}
+.lg-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:clamp(32px,5vw,64px);align-items:start}
+@media (max-width:899px){.lg-grid{grid-template-columns:1fr;gap:var(--s-md)}}
+.lg-toc{position:sticky;top:76px}
+@media (max-width:899px){.lg-toc{position:static}}
+.lg-toc summary{list-style:none;cursor:pointer;font-weight:var(--w-bold);font-size:var(--t-15);padding:12px var(--s-md);
+  border:var(--bw-line) solid var(--hairline);border-radius:var(--r-lg);background:var(--surface);display:flex;align-items:center}
+.lg-toc summary::-webkit-details-marker{display:none}
+.lg-toc summary::after{content:"";margin-left:auto;width:16px;height:1.45em;background:var(--ink-muted);
+  -webkit-mask:var(--chev) center/14px 14px no-repeat;mask:var(--chev) center/14px 14px no-repeat;transition:transform .2s}
+.lg-toc details[open] summary::after{transform:rotate(180deg)}
+@media (min-width:900px){.lg-toc summary{display:none}}
+.lg-toc ol{list-style:none;margin:0;padding:var(--s-xs) 0;display:grid;gap:2px}
+@media (max-width:899px){.lg-toc ol{padding:var(--s-xs) var(--s-xs) 0}}
+.lg-toc a{display:block;padding:7px 12px;border-radius:var(--r);color:var(--ink-2);text-decoration:none;font-size:var(--t-14);line-height:1.35;
+  border-left:2px solid transparent}
+.lg-toc a:hover{background:var(--canvas-soft);color:var(--ink)}
+.lg-toc a[aria-current]{color:var(--brand-soft-ink);background:var(--brand-soft);font-weight:var(--w-mid)}
+.lg-body{max-width:68ch}
+.lg-body section{padding:var(--s-md) 0 var(--s-sm);border-top:var(--bw-hair) solid var(--hairline);scroll-margin-top:80px}
+.lg-body section:first-child{border-top:0;padding-top:0}
+.pv-page h2{font-size:var(--t-22);letter-spacing:-.01em;margin:0 0 var(--s-xs);border:0;padding:0}
+.pv-page p{color:var(--ink-2);font-size:var(--t-16);line-height:1.65;margin:0 0 var(--s-sm)}
+.lg-body a{color:var(--brand-soft-ink);text-underline-offset:3px}
+.lg-ask{margin-top:var(--s-lg)!important;padding:var(--s-md);border-radius:var(--r-lg);background:var(--canvas-soft);color:var(--ink)!important}
+/* footer, landing and learn pages */
+.ft{margin-top:var(--s-xl);background:var(--canvas-soft);border-top:var(--bw-hair) solid var(--hairline)}
+.ft-in{max-width:1040px;margin:0 auto;padding:var(--s-xl) var(--s-md) var(--s-lg);display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--s-lg)}
+@media (max-width:720px){.ft-in{grid-template-columns:1fr 1fr}.ft-about{grid-column:1/-1}}
+@media (max-width:400px){.ft-in{grid-template-columns:minmax(0,1fr)}}
+.ft-logo{display:inline-flex;color:var(--ink)}.ft-logo svg{height:20px;width:auto}
+.ft-about p{margin:var(--s-sm) 0 0;color:var(--ink-2);font-size:var(--t-15);line-height:1.5;max-width:300px}
+.ft h2{font-size:var(--t-14);letter-spacing:0;font-weight:var(--w-bold);color:var(--ink-muted);margin:0 0 10px;border:0;padding:0}
+.ft ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.ft ul a{display:block;padding:var(--s-xs) 0;color:var(--ink-2);text-decoration:none;font-size:var(--t-15)}
+.ft ul a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.ft-base{max-width:1120px;margin:0 auto;padding:var(--s-md);display:flex;justify-content:space-between;gap:var(--s-md);flex-wrap:wrap;
+  border-top:var(--bw-hair) solid var(--hairline);font-size:var(--t-13);color:var(--ink-muted)}
+.ft-base a{color:var(--ink-muted);text-decoration:none}.ft-base a:hover{color:var(--ink)}
+/* each lens: its icon beside the heading, the open lens filled in the sidebar, the phone's lens button tinted */
+.lens-h{display:flex;align-items:center;gap:14px;margin:0 0 var(--s-md)}
+.lens-h h1{margin:0}
+.lens-hic{flex:none;width:48px;height:48px;border-radius:var(--r-lg);display:grid;place-items:center;color:var(--lens);
+  background:color-mix(in srgb,var(--lens) 14%,var(--surface))}
+.lens-hic .ic{width:21px;height:24px}
+@media (max-width:560px){.lens-h{align-items:flex-start}.lens-hic{width:40px;height:40px;border-radius:var(--r-lg);margin-top:4px}}
+.rail a[aria-current="page"][data-lens]{background:color-mix(in srgb,var(--lens,var(--ink)) 13%,var(--canvas));color:var(--lens,var(--ink));font-weight:var(--w-bold)}
+.tb-mod .menu-b{background:color-mix(in srgb,var(--logo-slash,var(--ink)) 12%,var(--surface));color:var(--logo-slash,var(--ink));border-color:transparent}
+/* the home page introduces patandfam; the Beta tag belongs inside the app */
+/* buttons: the brand purple for the main action, a soft purple tint for the smaller ones; no black slabs */
+.ld-cta,.vv-go,.vvx-go,.xc-go,.ex-dl,.fc-got,.sn.sn-next,.gm-b.go{background:var(--brand-fill);color:var(--brand-fill-ink);border-color:var(--brand-fill);
+  box-shadow:var(--shadow-1);
+  transition:transform .15s,box-shadow .15s,filter .15s}
+.ld-cta:hover,.vv-go:hover,.vvx-go:hover,.xc-go:hover,.ex-dl:not(:disabled):hover,.fc-got:hover,.sn.sn-next:hover,.gm-b.go:hover{
+  background:var(--brand-fill);color:var(--brand-fill-ink);opacity:1;filter:brightness(1.07);transform:translateY(-1px)}
+.ld-top-cta,.acct-b:not(.in){background:var(--brand-soft);color:var(--brand-soft-ink);border-color:transparent}
+.ld-top-cta:hover,.acct-b:not(.in):hover{background:color-mix(in srgb,var(--brand-fill) 18%,var(--canvas));color:var(--brand-soft-ink);border-color:transparent}
+.xm-nav button.ans,.fb-rate button[aria-pressed="true"],.hlnote-b button.on{background:var(--brand-fill);border-color:var(--brand-fill);color:var(--brand-fill-ink)}
+.fc-bar i,.xm-bar i{background:var(--brand-fill)}
+.ld-cta:focus-visible,.ld-top-cta:focus-visible,.vv-go:focus-visible,.xc-go:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.ld-cta,.vv-go,.vvx-go,.xc-go,.ex-dl,.fc-got,.sn.sn-next,.gm-b.go{transition:none}
+  .ld-cta:hover,.vv-go:hover,.vvx-go:hover,.xc-go:hover,.fc-got:hover{transform:none}}
+/* the phone on the landing page: the screen itself on a soft shadow, no black bezel */
+.ld-phone{border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:var(--r-2xl);
+  box-shadow:0 2px 6px rgba(30,20,50,.08),0 30px 70px -20px rgba(60,20,90,.35)}
+/* the hero sits on a soft glow of the five lens colours */
+.ld-hero{position:relative;isolation:isolate}
+.ld-hero::before{content:"";position:absolute;z-index:-1;left:50%;top:18%;width:min(640px,90vw);height:320px;
+  transform:translateX(-50%);filter:blur(70px);opacity:.16;border-radius:50%;
+  background:conic-gradient(from 90deg,var(--lens-morbid-anatomy),var(--lens-microbiology),var(--lens-haematology),
+    var(--lens-chemical-pathology),var(--lens-pharmacology),var(--lens-morbid-anatomy))}
+.ld-hero h1{max-width:16ch;text-wrap:balance}
+.ld-steps li::before{background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand)}
+.ld-ic{transition:color .18s,border-color .18s}
+.ld-feat:hover .ld-ic{color:var(--brand);border-color:color-mix(in srgb,var(--brand) 35%,transparent)}
+.ld-q summary:hover{color:var(--brand)}
+.hm-mod.on{transition:border-color .18s,box-shadow .18s,transform .18s}
+.hm-mod.on:hover{border-color:var(--brand);box-shadow:var(--shadow-2);transform:translateY(-1px)}
+.hm-mod.on .hm-go{color:var(--brand)}
+@media (prefers-reduced-motion:reduce){.ld-cta:hover,.hm-mod.on:hover{transform:none}}
+/* the page's sections run wider than its text: steps in a row, features as cards, the viva first */
+.ld{max-width:1040px}
+.ld-hero,.ld-faq{max-width:760px;margin-left:auto;margin-right:auto}
+.ld-video{max-width:880px;margin-left:auto;margin-right:auto}
+@media (min-width:760px){
+  .ld-steps{grid-template-columns:repeat(3,1fr);gap:var(--s-lg)}
+  .ld-steps li{grid-template-columns:1fr;gap:var(--s-xs);align-content:start}
+  .ld-steps li::before{grid-row:auto;margin-bottom:var(--s-xs)}
+}
+.ld-feats{gap:var(--s-md);grid-template-columns:1fr}
+.ld-feat{flex-direction:column;gap:var(--s-sm);padding:var(--s-lg);border:var(--bw-hair) solid var(--hairline);border-radius:var(--r-lg);background:var(--surface)}
+@media (min-width:600px){.ld-feats{grid-template-columns:1fr 1fr}.ld-lead{grid-column:1/-1}}
+@media (min-width:880px){.ld-feats{grid-template-columns:repeat(3,1fr)}.ld-lead{grid-column:span 2}}
+.ld-feat.ld-lead{background:var(--brand-soft);border-color:transparent}
+.ld-feat.ld-lead .ld-ic{background:var(--brand-fill);color:var(--brand-fill-ink);border-color:transparent}
+.ld-lead h3{font-size:var(--t-22)}
+.ld-lead p{font-size:var(--t-17);max-width:46ch}
+/* a card lifts a little under the pointer, and its "Try it" link appears; on a touch screen the link always shows */
+.ld-feat{transition:transform .18s,box-shadow .18s,border-color .18s}
+/* on a phone, eight boxes stacked fill two screens: the features become rows, and only the lead stays a card */
+@media (max-width:599px){
+  .ld-feats{gap:0}
+  .ld-feat:not(.ld-lead){flex-direction:row;gap:var(--s-md);padding:var(--s-md) 0;border:0;border-top:var(--bw-line) solid var(--hairline);border-radius:0;background:none}
+  .ld-feat.ld-lead{margin-bottom:var(--s-sm)}
+}
+.ld-feat>div{display:flex;flex-direction:column;flex:1}
+.ld-try{align-self:flex-start;margin-top:var(--s-sm);font-size:var(--t-15);font-weight:var(--w-bold);text-decoration:none;color:var(--brand-soft-ink);
+  background:var(--brand-soft);padding:7px 14px;border-radius:var(--r-full);transition:opacity .18s,transform .18s}
+.ld-lead .ld-try{background:var(--brand-fill);color:var(--brand-fill-ink)}
+.ld-try:hover{background:var(--brand-fill);color:var(--brand-fill-ink)}
+@media (hover:hover){
+  .ld-feat:hover{transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(60,20,90,.35);border-color:color-mix(in srgb,var(--brand-fill) 30%,var(--hairline))}
+}
+@media (prefers-reduced-motion:reduce){.ld-feat,.ld-try{transition:none}.ld-feat:hover{transform:none}}
+.ld-close{margin:var(--s-xl) 0 0;padding:clamp(40px,6vw,64px) var(--s-md);text-align:center;border-radius:var(--r-xl);background:var(--brand-soft)}
+.ld-close h2{font-size:var(--t-d2);letter-spacing:-.02em;margin:0 0 var(--s-xs);border:0;padding:0}
+.ld-close p{color:var(--ink-2);font-size:var(--t-17);margin:0 0 var(--s-lg)}
+/* a list block: a short label, then the items */
+.blist{margin:var(--s-md) 0}
+.blist .bl-label{margin:0 0 6px;font-weight:var(--w-bold);font-size:var(--t-15)}
+.blist ul{margin:0;padding-left:22px;line-height:1.6}
+.blist li{margin:4px 0}
+/* the assessment tab, for a student without an account: a lock and "Free account" */
+.rail a:has(.as-lock){flex-wrap:wrap;row-gap:4px}
+.as-lock{display:inline-flex;align-items:center;gap:4px;margin-left:22px;padding:2px 8px;border-radius:var(--r-full);
+  font-size:var(--t-12);font-weight:var(--w-bold);white-space:nowrap;color:var(--brand-soft-ink);background:var(--brand-soft)}
+.as-lock svg{width:12px;height:12px}
+.pf-in .as-lock{display:none}
+/* ---- small screens, zoom and the keyboard ------------------------------------------------ */
+/* whatever gets focus or is scrolled to stops clear of the sticky bars and the page footer */
+html{scroll-padding-top:calc(var(--h-lg) + var(--h-md) + var(--s-xs))}
+html:has(body.has-pg){scroll-padding-bottom:calc(var(--pg-h) + var(--s-md))}
+/* typing a note: the footer steps aside so it doesn't ride on top of the phone's keyboard */
+body.has-pg:has(textarea:focus,input:not([type=checkbox]):not([type=radio]):not([type=range]):focus) .pg-nav{display:none}
+/* the top bar never pushes the page sideways: its items shrink, and on a narrow phone it carries less */
+.topbar{padding-top:max(var(--s-xs),env(safe-area-inset-top))}
+.topbar>*{min-width:0}
+@media (max-width:560px){
+  .topbar .gm-back{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .topbar .gm-back svg{display:inline-block;vertical-align:-4px}
+}
+@media (max-width:400px){
+  .tb-app .wordmark::after{display:none}
+  .topbar .ld-top-cta,.topbar .acct-b{margin-right:0}
+  .theme-sw{width:var(--h-sm);height:var(--h-sm);padding:0;justify-content:center;border-radius:50%}
+  .theme-sw .ts-k,.theme-sw:not([aria-checked="true"]) .ts-sun,.theme-sw[aria-checked="true"] .ts-moon{display:none}
+  .theme-sw .ts-ic{width:18px;height:18px;color:var(--ink-2)}
+}
+/* a module behind the all-access pass: its badge, its public page and the price on the landing page */
+.ps-badge{display:inline-flex;align-items:center;gap:var(--s-xxs);height:28px;padding:0 var(--s-sm);border-radius:var(--r-full);
+  background:var(--brand-soft);color:var(--brand-soft-ink);font-size:var(--t-14);font-weight:var(--w-mid)}
+.ps-badge svg{width:14px;height:14px}
+.lm-pass .ps-badge{margin-bottom:var(--s-sm)}
+.lm-price{color:var(--ink-muted);font-size:var(--t-15);font-weight:var(--w-mid)}
+.ps .ps-badge{margin-bottom:var(--s-md)}
+.ps-box{max-width:460px;margin:var(--s-lg) auto 0;padding:var(--s-lg);border:var(--bw-line) solid var(--hairline);border-radius:var(--r-xl);
+  background:var(--surface);box-shadow:var(--shadow-2);text-align:left}
+.ps-price{margin:0;font-size:var(--t-30);font-weight:var(--w-bold);letter-spacing:var(--ls-head)}
+.ps-inc{margin:var(--s-xxs) 0 var(--s-lg);color:var(--ink-2)}
+.ps-box h2{font-size:var(--t-16);margin:0 0 var(--s-xs);border:0;padding:0}
+.ps-list{list-style:none;margin:0 0 var(--s-lg);padding:0;display:grid;gap:var(--s-xs)}
+.ps-list li{position:relative;padding-left:26px;color:var(--ink-2)}
+.ps-list li::before{content:"";position:absolute;left:2px;top:.35em;width:14px;height:8px;border-left:2px solid var(--correct);border-bottom:2px solid var(--correct);transform:rotate(-45deg)}
+.ps-box .ld-cta{display:flex;width:100%}
+.ps-free{margin-top:var(--s-lg);color:var(--ink-muted)}
+.pr-grid{display:grid;gap:var(--s-md);grid-template-columns:1fr}
+@media (min-width:700px){.pr-grid{grid-template-columns:1fr 1fr}}
+.pr-card{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-xs);padding:var(--s-lg);border:var(--bw-line) solid var(--hairline);
+  border-radius:var(--r-xl);background:var(--surface)}
+.pr-card h3{font-size:var(--t-18);margin:0}
+.pr-amt{margin:0;font-size:var(--t-30);font-weight:var(--w-bold);letter-spacing:var(--ls-head)}
+.pr-card p:not(.pr-amt){color:var(--ink-2);margin:0 0 var(--s-sm);flex:1}
+.pr-pass{background:var(--brand-soft);border-color:transparent}
+.pr-card .btn,.lm-pass .btn{border:var(--bw-line) solid var(--line-strong);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:var(--w-mid)}
+@media (hover:hover){.pr-card .btn:hover,.lm-pass .btn:hover{border-color:var(--ink-faint)}}
+
+.gm{max-width:560px;margin:0 auto;padding:var(--s-lg) var(--s-md) var(--s-xl);min-height:calc(100vh - 140px);
+  display:flex;flex-direction:column}
+/* the start screen: the same dark stage and hand of cards as the way in */
+.gm-intro{text-align:center}
+.gm-stage{display:flex;justify-content:center;align-items:center;height:210px;border-radius:var(--r-xl);margin:0 0 var(--s-lg);
+  background:radial-gradient(60% 80% at 50% 50%,color-mix(in srgb,var(--brand-fill) 16%,transparent),transparent 70%),var(--brand-soft)}
+.gm h1{font-size:var(--t-d1);letter-spacing:-.03em;margin:0 0 var(--s-xs)}
+.gm-sub{color:var(--ink-2);font-size:var(--t-17);line-height:1.5;margin:0 0 var(--s-sm)}
+.gm-how{color:var(--ink-muted);font-size:var(--t-15);margin:0 0 var(--s-md)}
+.gm-chip{display:inline-flex;align-items:center;gap:6px;font-size:var(--t-14);font-weight:var(--w-mid);color:var(--ink-2);
+  background:var(--canvas-soft);padding:5px 12px;border-radius:var(--r-full);margin:0 0 var(--s-md)}
+.gm-chip[hidden]{display:none}
+.gm-chip svg{width:15px;height:15px;color:var(--warning)}
+/* the round */
+.gm-dots{display:flex;gap:4px;margin-bottom:var(--s-xs)}
+.gm-dots i{flex:1;height:6px;border-radius:var(--r-xs);background:var(--hairline);transition:background .3s}
+.gm-dots i.ok{background:var(--correct)}.gm-dots i.no{background:var(--wrong)}.gm-dots i.now{background:var(--ink-muted)}
+.gm-meta{display:flex;align-items:center;justify-content:space-between;min-height:28px;margin-bottom:var(--s-sm)}
+.gm-count{font-size:var(--t-13);color:var(--ink-muted);font-variant-numeric:tabular-nums;font-weight:var(--w-mid)}
+.gm-streak{display:inline-flex;align-items:center;gap:4px;font-size:var(--t-13);font-weight:var(--w-bold);color:var(--warning);
+  background:color-mix(in srgb,var(--warning) 13%,transparent);padding:3px 10px 3px 8px;border-radius:var(--r-full)}
+.gm-streak[hidden]{display:none}
+.gm-streak svg{width:15px;height:15px}
+.gm-streak.pop{animation:gm-pop .35s cubic-bezier(.2,1.6,.4,1)}
+.gm-pile{position:relative;margin-bottom:22px}
+.gm-under{position:absolute;inset:0;border-radius:var(--r-2xl);background:var(--surface);border:var(--bw-line) solid var(--hairline);
+  transition:opacity .3s}
+.gm-under.u1{transform:translateY(10px) scale(.95);opacity:.75}
+.gm-under.u2{transform:translateY(20px) scale(.9);opacity:.4}
+.gm-card{position:relative;background:var(--surface);border:2px solid var(--hairline);border-radius:var(--r-2xl);
+  padding:56px var(--s-lg) var(--s-lg);min-height:250px;display:flex;flex-direction:column;justify-content:center;
+  box-shadow:0 14px 34px -16px rgba(0,0,0,.25);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;
+  transition:border-color .2s ease, box-shadow .2s ease}
+.gm-card.ok{border-color:var(--correct);box-shadow:0 0 0 4px color-mix(in srgb,var(--correct) 18%,transparent),0 14px 34px -16px rgba(0,0,0,.25)}
+.gm-card.no{border-color:var(--wrong);box-shadow:0 0 0 4px color-mix(in srgb,var(--wrong) 18%,transparent),0 14px 34px -16px rgba(0,0,0,.25);
+  animation:gm-shake .4s ease}
+.gm-card.done{cursor:pointer}
+.gm-card.enter{animation:gm-enter .32s cubic-bezier(.2,.9,.3,1)}
+.gm-s{font-size:var(--t-d3);line-height:1.25;font-weight:var(--w-bold);letter-spacing:-.015em;margin:0}
+.gm-stamp{position:absolute;top:16px;right:16px;font-style:normal;font-size:var(--t-20);font-weight:var(--w-bold);letter-spacing:.12em;
+  text-transform:uppercase;border:3px solid;border-radius:var(--r);padding:1px 10px;opacity:0;pointer-events:none;
+  transform:rotate(var(--r))}
+.gm-stamp.t{color:var(--correct);--r:10deg}.gm-stamp.f{color:var(--wrong);--r:-10deg}
+.gm-stamp.land{opacity:1;animation:gm-stamp .34s cubic-bezier(.2,1.5,.4,1)}
+.gm-fb{margin-top:var(--s-md);padding-top:var(--s-md);border-top:var(--bw-hair) solid var(--hairline)}
+.gm-verdict{font-weight:var(--w-bold);font-size:var(--t-17);margin:0 0 4px}
+.gm-verdict.ok{color:var(--correct)}.gm-verdict.no{color:var(--wrong)}
+.gm-why{margin:0;font-size:var(--t-17);line-height:1.45;color:var(--ink)}
+.gm-again{margin:6px 0 0;font-size:var(--t-13);color:var(--ink-muted)}
+.gm-btns{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-sm);margin-top:var(--s-md)}
+.gm-b{font:inherit;font-size:var(--t-20);font-weight:var(--w-bold);padding:15px;border-radius:var(--r-full);cursor:pointer;border:0;
+  color:var(--canvas);box-shadow:0 4px 0 rgba(0,0,0,.22);transition:transform .08s ease, box-shadow .08s ease, filter .15s}
+.gm-b:hover{filter:brightness(1.07)}
+.gm-b:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.22)}
+.gm-b.trap{background:var(--wrong)}.gm-b.true{background:var(--correct)}
+.gm-b.go{grid-column:1/-1;background:var(--brand-fill);color:var(--brand-fill-ink)}
+/* phones hide the breadcrumb, so a back link to the module takes its place */
+.gm-back{display:none;align-items:center;gap:2px;color:var(--ink-2);text-decoration:none;font-weight:var(--w-mid);font-size:var(--t-15);
+  padding:6px 4px;margin-left:var(--s-xs)}
+.gm-back svg{width:18px;height:18px}
+@media (max-width:560px){.gm-back{display:inline-flex}}
+/* the end */
+.gm-res{text-align:center;padding-top:var(--s-sm)}
+.gm-ring{--p:0;position:relative;width:160px;height:160px;margin:0 auto var(--s-md);border-radius:50%;
+  background:conic-gradient(var(--correct) calc(var(--p) * 1turn),var(--hairline) 0)}
+.gm-ring::before{content:"";position:absolute;inset:13px;border-radius:50%;background:var(--canvas)}
+.gm-ring div{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.gm-ring b{font-size:var(--t-48);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.gm-ring span{font-size:var(--t-18);color:var(--ink-muted);font-weight:var(--w-mid);margin:14px 0 0 3px}
+.gm-end h2{font-size:var(--t-30);letter-spacing:-.02em;margin:0 0 4px;border:0;padding:0}
+.gm-chip.gm-new{color:var(--warning);background:color-mix(in srgb,var(--warning) 13%,transparent)}
+.gm-miss{margin-top:var(--s-md)}
+.gm-miss h3{font-size:var(--t-20);margin:0 0 var(--s-xs);border:0;padding:0}
+.gm-m{display:block;padding:14px 0;border-bottom:var(--bw-hair) solid var(--hairline);text-decoration:none;color:inherit;text-align:left}
+.gm-m:first-of-type{border-top:var(--bw-hair) solid var(--hairline)}
+.gm-m b{display:block;font-size:var(--t-16);color:var(--ink)}
+.gm-m span{display:block;font-size:var(--t-15);color:var(--ink-2);margin-top:2px}
+.gm-m em{display:inline-block;margin-top:4px;font-style:normal;font-size:var(--t-14);color:var(--ink);font-weight:var(--w-mid);text-decoration:underline;
+  text-underline-offset:3px;text-decoration-color:var(--hairline)}
+.gm-end .gm-btns{margin-top:var(--s-lg)}
+.gm-link{display:block;text-align:center;margin-top:var(--s-md);color:var(--ink-2);font-size:var(--t-15)}
+.gm-confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:60}
+.gm-confetti i{position:absolute;left:50%;top:38%;width:9px;height:14px;border-radius:var(--r-xs)}
+@keyframes gm-enter{from{transform:translateY(16px) scale(.95);opacity:.3}to{transform:none;opacity:1}}
+@keyframes gm-stamp{from{transform:rotate(var(--r)) scale(2.2);opacity:0}to{transform:rotate(var(--r)) scale(1);opacity:1}}
+@keyframes gm-shake{20%{translate:-9px 0}40%{translate:8px 0}60%{translate:-5px 0}80%{translate:3px 0}}
+@keyframes gm-pop{from{transform:scale(1.3)}to{transform:scale(1)}}
+@media (max-width:560px){.gm-stage{height:190px}}
+@media (prefers-reduced-motion:reduce){
+  .gm-card,.gm-card.no,.gm-card.enter,.gm-stamp.land,.gm-streak.pop{animation:none;transition:none}}
+</style></head><body><header class="topbar tb-app"><a class="wordmark" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8083 1934" role="img" aria-label="patandfam"><title>patandfam</title><g transform="translate(-87.0 1536.0) scale(1 -1)"><g fill="currentColor"><path transform="translate(0.0 0)" d="M158 1088H297V888Q380 1002 488.0 1059.0Q596 1116 729 1116Q961 1116 1126.0 949.0Q1291 782 1291 547Q1291 307 1127.5 139.5Q964 -28 733 -28Q603 -28 494.0 26.0Q385 80 297 187V-398H158ZM718 981Q536 981 411.5 854.0Q287 727 287 538Q287 414 342.5 315.0Q398 216 501.5 158.0Q605 100 720 100Q833 100 932.5 158.5Q1032 217 1091.0 322.0Q1150 427 1150 542Q1150 658 1091.5 762.0Q1033 866 934.0 923.5Q835 981 718 981Z"/><path transform="translate(1397.0 0)" d="M1240 1088V0H1102V187Q1014 80 904.5 26.0Q795 -28 665 -28Q434 -28 270.5 139.5Q107 307 107 547Q107 782 272.0 949.0Q437 1116 669 1116Q803 1116 911.5 1059.0Q1020 1002 1102 888V1088ZM680 981Q563 981 464.0 923.5Q365 866 306.5 762.0Q248 658 248 542Q248 427 307.0 322.0Q366 217 465.5 158.5Q565 100 679 100Q794 100 897.0 158.0Q1000 216 1055.5 315.0Q1111 414 1111 538Q1111 727 986.5 854.0Q862 981 680 981Z"/><path transform="translate(2796.0 0)" d="M278 1492H419V1088H641V968H419V0H278V968H87V1088H278Z"/><path transform="translate(4319.8 0)" d="M8 1088H105Q106 1302 112 1341Q123 1431 187.5 1483.5Q252 1536 370 1536Q455 1536 562 1497V1289Q503 1306 465 1306Q417 1306 395 1286Q379 1271 379 1224L378 1088H551V856H378V0H105V856H8Z"/><path transform="translate(4892.8 0)" d="M942 1088H1214V0H942V115Q862 39 781.5 5.5Q701 -28 607 -28Q396 -28 242.0 135.5Q88 299 88 542Q88 794 237.0 955.0Q386 1116 599 1116Q697 1116 783.0 1079.0Q869 1042 942 968ZM655 864Q528 864 444.0 774.5Q360 685 360 545Q360 404 445.5 313.0Q531 222 656 222Q785 222 870.0 311.5Q955 401 955 546Q955 688 870.0 776.0Q785 864 655 864Z"/><path transform="translate(6244.8 0)" d="M136 1088H410V963Q480 1040 565.5 1078.0Q651 1116 752 1116Q854 1116 936.0 1066.0Q1018 1016 1068 920Q1133 1016 1227.5 1066.0Q1322 1116 1434 1116Q1550 1116 1638.0 1062.0Q1726 1008 1764.5 921.0Q1803 834 1803 638V0H1528V552Q1528 737 1482.0 802.5Q1436 868 1344 868Q1274 868 1218.5 828.0Q1163 788 1136.0 717.5Q1109 647 1109 491V0H834V527Q834 673 812.5 738.5Q791 804 748.0 836.0Q705 868 644 868Q576 868 520.5 827.5Q465 787 437.5 714.0Q410 641 410 484V0H136Z"/></g><polygon class="slash" style="fill:var(--logo-slash, var(--lens-morbid-anatomy))" points="3417.4,0.0 3731.3,0.0 4284.3,1536.0 3970.3,1536.0"/></g></svg></a><nav class="crumb" aria-label="Breadcrumb"><a href="diabetes.html">Diabetes mellitus</a><span class="crumb-l">True or trap</span></nav><a class="gm-back" href="diabetes.html#games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Diabetes mellitus</a><span class="tb-sp"></span><button id="themeb" class="theme-sw" role="switch" aria-checked="false" aria-label="Dark"><span class="ts-k" aria-hidden="true"></span><svg class="ts-ic ts-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="ts-ic ts-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button></header><main class="gm"><section id="gm-intro" class="gm-intro"><div class="gm-stage"><span class="gdeck" aria-hidden="true"><span class="gd c1"><i class="gd-st f">Trap</i><span>Glycosuria diagnoses diabetes mellitus.</span></span><span class="gd c2"><i class="gd-st t">True</i><span>HbA1c reads falsely low in haemolysis.</span></span><span class="gd c3"><i class="gd-q">?</i><span>Ketones in the urine mean type 1 diabetes.</span></span></span></div><h1>True or trap</h1><p class="gm-sub">Diabetes mellitus. 15 statements. Is each one true, or a trap?</p><p class="gm-how">Swipe right or tap True. Swipe left or tap Trap.</p><p class="gm-chip" id="gm-intro-best" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 1.5c.4 3.6 4.9 6 4.9 11.2a6.4 6.4 0 0 1-12.8 0c0-3 1.5-4.7 2.9-6.2.1 2 .9 3.4 2.2 4.1-.3-3.6 1.1-6.7 2.8-9.1z"/></svg><span></span></p><div class="gm-btns"><button class="gm-b go" id="gm-start">Start</button></div></section><section id="gm-play" hidden><div class="gm-dots" id="gm-dots" aria-hidden="true"></div><div class="gm-meta"><span class="gm-count" id="gm-count"></span><span class="gm-streak" id="gm-streak" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 1.5c.4 3.6 4.9 6 4.9 11.2a6.4 6.4 0 0 1-12.8 0c0-3 1.5-4.7 2.9-6.2.1 2 .9 3.4 2.2 4.1-.3-3.6 1.1-6.7 2.8-9.1z"/></svg><span id="gm-streak-n"></span></span></div><div class="gm-pile"><i class="gm-under u2" id="gm-u2"></i><i class="gm-under u1" id="gm-u1"></i><div class="gm-card" id="gm-card" aria-live="polite"><i class="gm-stamp t" id="gm-st-t" aria-hidden="true">True</i><i class="gm-stamp f" id="gm-st-f" aria-hidden="true">Trap</i><p class="gm-s" id="gm-s"></p><div class="gm-fb" id="gm-fb" hidden><p class="gm-verdict" id="gm-verdict"></p><p class="gm-why" id="gm-why"></p><p class="gm-again" id="gm-again" hidden>You&#x27;ll see this one again.</p></div></div></div><div class="gm-btns" id="gm-ans"><button class="gm-b trap" id="gm-trap">← Trap</button><button class="gm-b true" id="gm-true">True →</button></div><div class="gm-btns"><button class="gm-b go" id="gm-next" hidden>Next →</button></div></section><section id="gm-end" class="gm-end" hidden><div class="gm-res"><div class="gm-ring" id="gm-ring" role="img"><div><b id="gm-num">0</b><span id="gm-of"></span></div></div><h2 id="gm-rank"></h2><p class="gm-sub" id="gm-score"></p><p class="gm-chip" id="gm-best"></p></div><div class="gm-miss" id="gm-miss"></div><div class="gm-btns"><button class="gm-b go" id="gm-again-b">Play again</button></div><a class="gm-link" href="diabetes.html">Back to the module</a></section></main><script type="application/json" id="gm-data">{"module_href": "diabetes.html", "round": 15, "ui": {"streak": "{n} in a row", "ranks": [[1, "Examiner-proof."], [0.8, "Sharp eye."], [0.5, "Getting there."], [0, "The traps won this round."]], "deck": [["Glycosuria diagnoses diabetes mellitus.", false], ["HbA1c reads falsely low in haemolysis.", true], ["Ketones in the urine mean type 1 diabetes.", null]], "page_title": "True or trap · Diabetes mellitus · patandfam", "heading": "True or trap", "sub": "Diabetes mellitus. 15 statements. Is each one true, or a trap?", "how": "Swipe right or tap True. Swipe left or tap Trap.", "start": "Start", "true": "True", "trap": "Trap", "next": "Next", "right": "Right.", "wrong": "Not quite.", "its_true": "It's true.", "its_trap": "It's a trap.", "again_note": "You'll see this one again.", "score": "{n} of {t} right first time", "best": "Your best: {b}", "new_best": "A new best!", "missed": "Worth another look", "reread": "Read it in the module", "play_again": "Play again", "back": "Back to the module", "perfect": "Every one right first time."}, "items": [{"s": "Glycosuria diagnoses diabetes mellitus.", "a": false, "why": "A low renal threshold or pregnancy causes it too.", "sec": "cp-diagnosis", "lens": "chemical-pathology", "sources": ["dm-cp-crook-tests"], "lensTitle": "Chemical Pathology"}, {"s": "Ketones in the urine mean type 1 diabetes.", "a": false, "why": "In Nigeria ketoacidosis is common in type 2.", "sec": "cp-dka", "lens": "chemical-pathology", "sources": ["dm-edo2012"], "lensTitle": "Chemical Pathology"}, {"s": "HbA1c is reliable in sickle cell disease.", "a": false, "why": "Haemolysis shortens red cell life and lowers it.", "sec": "cp-hba1c", "lens": "chemical-pathology", "sources": ["dm-crook"], "lensTitle": "Chemical Pathology"}, {"s": "Kimmelstiel-Wilson nodules point to diabetes.", "a": true, "why": "They're almost pathognomonic of it.", "sec": "ma-histology", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Diffuse mesangial sclerosis is specific for diabetes.", "a": false, "why": "It's commoner, but only the nodular form is.", "sec": "ma-histology", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "A hyaline afferent arteriole points to diabetes.", "a": false, "why": "Age and hypertension cause it too. Efferent involvement points to diabetes.", "sec": "ma-histology", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Kimmelstiel-Wilson nodules show apple-green birefringence.", "a": false, "why": "Amyloid does. The nodules don't.", "sec": "ma-differentials", "lens": "morbid-anatomy", "sources": ["dm-ma-robbins-amyloid"], "lensTitle": "Morbid Anatomy"}, {"s": "Insulitis is the islet lesion of type 2 diabetes.", "a": false, "why": "Insulitis is type 1. Type 2 shows islet amyloid.", "sec": "ma-histology", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Type 2 diabetes is linked to HLA-DR3 and DR4.", "a": false, "why": "That's type 1. Type 2 has no HLA link.", "sec": "ma-aetiology", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Identical twins share type 2 more than type 1.", "a": true, "why": "Type 2 concordance is far higher.", "sec": "ma-aetiology", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Islet antibodies can appear before type 1 symptoms.", "a": true, "why": "They're found in most patients, often before onset.", "sec": "ma-pathogenesis", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Thirst causes the polyuria of diabetes.", "a": false, "why": "Glycosuria causes it. Thirst follows the water loss.", "sec": "ma-signs", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Myocardial infarction is the commonest cause of death in diabetes.", "a": true, "why": "Renal failure comes second.", "sec": "ma-course", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Neuropathy is a macrovascular complication.", "a": false, "why": "It's microvascular, with nephropathy and retinopathy.", "sec": "ma-complications", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "VEGF drives proliferative retinopathy.", "a": true, "why": "Poorly perfused retina makes it, and new vessels sprout.", "sec": "ma-complications", "lens": "morbid-anatomy", "sources": ["dm-ma-robbins-eye"], "lensTitle": "Morbid Anatomy"}, {"s": "A neuropathic foot ulcer hurts.", "a": false, "why": "It's painless. The foot can't feel the injury.", "sec": "ma-foot", "lens": "morbid-anatomy", "sources": ["dm-robbins"], "lensTitle": "Morbid Anatomy"}, {"s": "Infection turns dry gangrene wet.", "a": true, "why": "Bacteria liquefy the dead tissue.", "sec": "ma-foot", "lens": "morbid-anatomy", "sources": ["robbins-ci"], "lensTitle": "Morbid Anatomy"}, {"s": "Neuropathy predicted amputation in Nigerian patients.", "a": false, "why": "Ulcer age, arterial disease and osteomyelitis did.", "sec": "ma-foot", "lens": "morbid-anatomy", "sources": ["dm-ma-ugwu2019-amputation"], "lensTitle": "Morbid Anatomy"}, {"s": "An infected diabetic foot usually grows one organism.", "a": false, "why": "It's usually polymicrobial.", "sec": "mb-infections", "lens": "microbiology", "sources": ["dm-adeyemo2021"], "lensTitle": "Microbiology and Parasitology"}, {"s": "Gram-negative rods led a Nigerian foot ulcer series.", "a": true, "why": "They were most of the isolates.", "sec": "mb-infections", "lens": "microbiology", "sources": ["dm-adeyemo2021"], "lensTitle": "Microbiology and Parasitology"}, {"s": "Mucormycosis hyphae have septa.", "a": false, "why": "They have none, and branch at right angles.", "sec": "mb-infections", "lens": "microbiology", "sources": ["dm-robbins-mucor"], "lensTitle": "Microbiology and Parasitology"}, {"s": "Ketoacidosis favours mucormycosis.", "a": true, "why": "Profound acidosis lets the moulds invade.", "sec": "mb-infections", "lens": "microbiology", "sources": ["dm-mb-gladwin-fungi"], "lensTitle": "Microbiology and Parasitology"}, {"s": "Pseudomonas causes malignant otitis externa.", "a": true, "why": "It burrows from the ear canal into the mastoid.", "sec": "mb-infections", "lens": "microbiology", "sources": ["dm-mb-gladwin-pseudomonas"], "lensTitle": "Microbiology and Parasitology"}, {"s": "A neurogenic bladder favours urinary infection.", "a": true, "why": "Urine left standing lets bacteria multiply.", "sec": "mb-vulnerable", "lens": "microbiology", "sources": ["dm-robbins-uti"], "lensTitle": "Microbiology and Parasitology"}, {"s": "Bone under a diabetic foot ulcer usually grows one organism.", "a": false, "why": "Infection that spreads from an ulcer into bone is often mixed.", "sec": "mb-tests", "lens": "microbiology", "sources": ["dm-mb-robbins-osteo"], "lensTitle": "Microbiology and Parasitology"}, {"s": "An X-ray names the organism in osteomyelitis.", "a": false, "why": "It shows bone destruction, not the organism.", "sec": "mb-tests", "lens": "microbiology", "sources": ["dm-mb-robbins-osteo"], "lensTitle": "Microbiology and Parasitology"}, {"s": "One random glucose of 11.1 can diagnose diabetes.", "a": true, "why": "With symptoms. Without them, repeat it.", "sec": "cp-diagnosis", "lens": "chemical-pathology", "sources": ["dm-cp-crook-diagnosis"], "lensTitle": "Chemical Pathology"}, {"s": "A 2-hour OGTT of 9.5 mmol/L is diabetes.", "a": false, "why": "It's impaired glucose tolerance: 7.8 to below 11.1.", "sec": "cp-diagnosis", "lens": "chemical-pathology", "sources": ["dm-cp-crook-diagnosis"], "lensTitle": "Chemical Pathology"}, {"s": "A plain-tube glucose left for hours reads high.", "a": false, "why": "It reads low. The cells keep using glucose.", "sec": "cp-specimens", "lens": "chemical-pathology", "sources": ["dm-cp-crook-tests"], "lensTitle": "Chemical Pathology"}, {"s": "Urine strips can detect hypoglycaemia.", "a": false, "why": "They stay negative below the renal threshold.", "sec": "cp-specimens", "lens": "chemical-pathology", "sources": ["dm-cp-crook-tests"], "lensTitle": "Chemical Pathology"}, {"s": "Ketone strips detect acetoacetate best.", "a": true, "why": "β-hydroxybutyrate doesn't always react.", "sec": "cp-specimens", "lens": "chemical-pathology", "sources": ["dm-cp-crook-tests"], "lensTitle": "Chemical Pathology"}, {"s": "HbA1c reflects the past two to three months.", "a": true, "why": "It tracks the mean plasma glucose.", "sec": "cp-hba1c", "lens": "chemical-pathology", "sources": ["dm-robbins"], "lensTitle": "Chemical Pathology"}, {"s": "Total body potassium is high in DKA.", "a": false, "why": "Plasma potassium is often high. The body's store is low.", "sec": "cp-dka", "lens": "chemical-pathology", "sources": ["dm-crook"], "lensTitle": "Chemical Pathology"}, {"s": "A high amylase in DKA proves pancreatitis.", "a": false, "why": "Amylase can rise in DKA without it.", "sec": "cp-dka", "lens": "chemical-pathology", "sources": ["dm-cp-crook-coma"], "lensTitle": "Chemical Pathology"}, {"s": "HHS has no significant ketones.", "a": true, "why": "Enough insulin is probably left to stop lipolysis.", "sec": "cp-hhs", "lens": "chemical-pathology", "sources": ["dm-crook"], "lensTitle": "Chemical Pathology"}, {"s": "The sodium is often high in HHS.", "a": true, "why": "Far more water than sodium is lost.", "sec": "cp-hhs", "lens": "chemical-pathology", "sources": ["dm-cp-crook-coma"], "lensTitle": "Chemical Pathology"}, {"s": "Lactate widens the anion gap.", "a": true, "why": "It's an unmeasured anion replacing bicarbonate.", "sec": "cp-anion-gap", "lens": "chemical-pathology", "sources": ["dm-cp-crook-acidbase"], "lensTitle": "Chemical Pathology"}, {"s": "High insulin, low C-peptide means an insulinoma.", "a": false, "why": "It means injected insulin.", "sec": "cp-hypoglycaemia", "lens": "chemical-pathology", "sources": ["dm-crook"], "lensTitle": "Chemical Pathology"}, {"s": "Microalbuminuria is an early sign of nephropathy.", "a": true, "why": "It comes while kidney function looks normal.", "sec": "cp-microalbuminuria", "lens": "chemical-pathology", "sources": ["dm-crook"], "lensTitle": "Chemical Pathology"}, {"s": "Lack of insulin lowers the triglyceride.", "a": false, "why": "It raises it. Lipoprotein lipase needs insulin.", "sec": "cp-lipids", "lens": "chemical-pathology", "sources": ["dm-cp-crook-diagnosis"], "lensTitle": "Chemical Pathology"}, {"s": "Sulfonylureas work in type 1 diabetes.", "a": false, "why": "They need β cells to release insulin.", "sec": "ph-sulfonylureas", "lens": "pharmacology", "sources": ["dm-katzung-secretagogues"], "lensTitle": "Pharmacology"}, {"s": "Glibenclamide's effect lasts over a day.", "a": true, "why": "Its metabolites still work, and it stays in the β cell.", "sec": "ph-sulfonylureas", "lens": "pharmacology", "sources": ["dm-katzung-secretagogues"], "lensTitle": "Pharmacology"}, {"s": "Metformin causes hypoglycaemia on its own.", "a": false, "why": "It doesn't. Insulin and sulfonylureas do.", "sec": "ph-metformin", "lens": "pharmacology", "sources": ["dm-katzung-metformin", "dm-nstg-2022"], "lensTitle": "Pharmacology"}, {"s": "Metformin builds up when the kidneys fail.", "a": true, "why": "The kidney excretes it unchanged.", "sec": "ph-metformin", "lens": "pharmacology", "sources": ["dm-katzung-metformin"], "lensTitle": "Pharmacology"}, {"s": "Insulin drives potassium into cells.", "a": true, "why": "Plasma potassium falls when insulin is given.", "sec": "ph-insulin", "lens": "pharmacology", "sources": ["dm-crook"], "lensTitle": "Pharmacology"}, {"s": "Glargine can be mixed with soluble insulin.", "a": false, "why": "It's never mixed with another insulin.", "sec": "ph-insulin", "lens": "pharmacology", "sources": ["dm-katzung-insulin"], "lensTitle": "Pharmacology"}, {"s": "SGLT2 inhibitors can cause ketoacidosis at a normal glucose.", "a": true, "why": "The urine keeps removing glucose.", "sec": "ph-other-classes", "lens": "pharmacology", "sources": ["dm-katzung-other"], "lensTitle": "Pharmacology"}, {"s": "Pioglitazone causes fluid retention.", "a": true, "why": "It can cause heart failure.", "sec": "ph-other-classes", "lens": "pharmacology", "sources": ["dm-katzung-other"], "lensTitle": "Pharmacology"}, {"s": "Thiazides lower plasma glucose.", "a": false, "why": "They raise it.", "sec": "ph-interactions", "lens": "pharmacology", "sources": ["dm-robbins-drugs", "dm-crook-drugs"], "lensTitle": "Pharmacology"}, {"s": "β-blockers hide the warning signs of hypoglycaemia.", "a": true, "why": "They mask the adrenergic signs and delay recovery.", "sec": "ph-interactions", "lens": "pharmacology", "sources": ["dm-katzung-beta"], "lensTitle": "Pharmacology"}]}</script><script>
+(function(){
+var D=JSON.parse(document.getElementById("gm-data").textContent), U=D.ui, KEY="patandfam.diabetes.v1";
+var CALM=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+function $(s){ return document.querySelector(s); }
+function esc(x){ return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function st(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ return {}; } }
+function bestGet(){ return +(st().gameBest||0); }
+function bestSet(n){ try{ var s=st(); s.gameBest=n; localStorage.setItem(KEY,JSON.stringify(s)); if(window.pfSync) window.pfSync(); }catch(e){} }
+function buzz(p){ try{ if(navigator.vibrate) navigator.vibrate(p); }catch(e){} }
+/* a first answer missed goes to the module's Today's mix (the record's chk, as its quick checks keep it), with
+   the statement's words, since the flashcards live on another page; a later right first answer puts it right */
+function hash(x){ var h=5381; for(var i=0;i<x.length;i++) h=((h<<5)+h+x.charCodeAt(i))|0; return (h>>>0).toString(36); }
+function rec(it,ok){ try{ var s=st(), c=s.chk=s.chk||{}, k="gm:"+hash(it.s), r=c[k];
+  if(!ok) c[k]={x:"gm",s:it.sec||"",l:it.lens,f:it.s,a:it.a?1:0,b:it.why,ok:0,at:Date.now()};
+  else if(r&&!r.ok&&!r.fx){ r.fx=1; r.at=Date.now(); } else return;
+  localStorage.setItem(KEY,JSON.stringify(s)); if(window.pfSync) window.pfSync(); }catch(e){} }
+var queue, firstTry, res, cur, locked, total, streak, answeredAt=0;
+var card=$("#gm-card"), stT=$("#gm-st-t"), stF=$("#gm-st-f");
+function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function view(v){ ["gm-intro","gm-play","gm-end"].forEach(function(k){ $("#"+k).hidden=k!==v; }); }
+function start(){
+  total=Math.min(D.round,D.items.length);
+  queue=shuffle(D.items.map(function(x,i){ return i; })).slice(0,total).map(function(i){ return {i:i,first:true}; });
+  firstTry={}; res=[]; streak=0; showStreak(); view("gm-play"); window.scrollTo(0,0); dots(); show(); }
+function dots(){ var h="", n=res.length;   /* one dot per statement, in the order answered */
+  for(var k=0;k<total;k++) h+='<i class="'+(k<n?(res[k]?"ok":"no"):(k===n?"now":""))+'"></i>';
+  $("#gm-dots").innerHTML=h; $("#gm-count").textContent=Math.min(n+1,total)+" / "+total; }
+function showStreak(){ var s=$("#gm-streak"); s.hidden=streak<2; if(streak<2) return;
+  $("#gm-streak-n").textContent=U.streak.replace("{n}",streak);
+  s.classList.remove("pop"); void s.offsetWidth; s.classList.add("pop"); }
+function stamps(t,f){ stT.style.opacity=t; stF.style.opacity=f; }
+function show(){
+  if(!queue.length) return end();
+  cur=queue.shift(); locked=false; var it=D.items[cur.i];
+  card.className="gm-card"; card.style.transform="";
+  card.style.setProperty("--lens","var(--lens-"+it.lens+")");
+  stT.className="gm-stamp t"; stF.className="gm-stamp f"; stamps("","");
+  $("#gm-s").textContent=it.s;
+  $("#gm-u1").style.opacity=queue.length>0?"":"0"; $("#gm-u2").style.opacity=queue.length>1?"":"0";
+  $("#gm-fb").hidden=true; $("#gm-ans").hidden=false; $("#gm-next").hidden=true;
+  if(!CALM){ void card.offsetWidth; card.classList.add("enter"); }
+  $("#gm-true").focus({preventScroll:true}); }
+/* the answered card flies off the way its answer points, then the next one comes up */
+function next(){
+  if(!locked||!cur) return; var it=D.items[cur.i]; cur=null;
+  if(CALM||!card.animate) return show();
+  var dir=it.a?1:-1, an=card.animate([{transform:"none",opacity:1},
+      {transform:"translateX("+dir*130+"%) rotate("+dir*16+"deg)",opacity:0}],
+    {duration:260,easing:"cubic-bezier(.4,0,.8,.4)",fill:"forwards"});
+  an.onfinish=function(){ an.cancel(); show(); }; }
+function answer(saidTrue){
+  if(locked||!cur) return; locked=true; answeredAt=Date.now(); var it=D.items[cur.i], ok=(saidTrue===it.a);
+  if(cur.first){ firstTry[cur.i]=ok; res.push(ok); dots(); streak=ok?streak+1:0; showStreak(); rec(it,ok);
+    if(ok&&(streak===5||streak===10)) confetti(26); }
+  if(!ok){ var at=Math.min(queue.length,2+Math.floor(Math.random()*2)); queue.splice(at,0,{i:cur.i,first:false}); }   /* back again soon */
+  stamps("",""); (it.a?stT:stF).classList.add("land");
+  card.classList.remove("enter"); card.classList.add(ok?"ok":"no","done"); buzz(ok?12:[30,40,30]);
+  var v=$("#gm-verdict"); v.className="gm-verdict "+(ok?"ok":"no");
+  v.textContent=(ok?U.right:U.wrong)+" "+(it.a?U.its_true:U.its_trap);
+  $("#gm-why").textContent=it.why; $("#gm-again").hidden=ok;
+  $("#gm-fb").hidden=false; $("#gm-ans").hidden=true; $("#gm-next").hidden=false; $("#gm-next").focus({preventScroll:true}); }
+function confetti(n){
+  if(CALM||!document.body.animate) return;
+  var cols=["#c400f5","#0a7b77","#c83291","#6550d3","#1f6bad","#ffd166","#03862f","#ce392c"], box=document.createElement("div");
+  box.className="gm-confetti"; document.body.appendChild(box);
+  for(var k=0;k<n;k++){ var p=document.createElement("i"), dx=(Math.random()-.5)*Math.min(innerWidth,700), up=120+Math.random()*200,
+      r=(Math.random()-.5)*900; p.style.background=cols[k%cols.length]; box.appendChild(p);
+    p.animate([{transform:"translate(-50%,0) rotate(0)",opacity:1},
+               {transform:"translate("+dx*.55+"px,"+(-up)+"px) rotate("+r*.4+"deg)",opacity:1,offset:.3},
+               {transform:"translate("+dx+"px,"+(innerHeight*.6)+"px) rotate("+r+"deg)",opacity:0}],
+      {duration:1500+Math.random()*900,easing:"cubic-bezier(.25,.7,.5,1)",fill:"forwards"}); }
+  setTimeout(function(){ box.remove(); },2600); }
+function end(){
+  var keys=Object.keys(firstTry), got=keys.filter(function(k){ return firstTry[k]; }).length, best=bestGet(), nb=got>best;
+  if(nb) bestSet(got);
+  var rank=U.ranks.filter(function(r){ return got/total>=r[0]; })[0], line=U.score.replace("{n}",got).replace("{t}",total);
+  $("#gm-rank").textContent=rank?rank[1]:"";
+  $("#gm-score").textContent=line; $("#gm-of").textContent="/ "+total;
+  var ring=$("#gm-ring"), num=$("#gm-num"); ring.setAttribute("aria-label",line);
+  var b=$("#gm-best"); b.className="gm-chip"+(nb&&best?" gm-new":"");
+  b.textContent=nb&&best?U.new_best:U.best.replace("{b}",Math.max(got,best)+" / "+total);
+  var miss=keys.filter(function(k){ return !firstTry[k]; }).map(function(k){ return D.items[+k]; });
+  $("#gm-miss").innerHTML=miss.length?'<h3>'+esc(U.missed)+'</h3>'+miss.map(function(it){
+      return '<a class="gm-m" href="'+esc(D.module_href)+'#'+esc(it.sec)+'"><b>'+esc(it.s)+'</b>'
+        +'<span>'+esc(it.a?U.its_true:U.its_trap)+' '+esc(it.why)+'</span><em>'+esc(U.reread)+' →</em></a>'; }).join("")
+    :'<p class="gm-sub">'+esc(U.perfect)+'</p>';
+  view("gm-end"); window.scrollTo(0,0);
+  /* the ring and the number count up together, then confetti for a strong round or a new best */
+  var t0=null, dur=CALM?0:900;
+  function step(t){ if(t0===null) t0=t; var k=dur?Math.min(1,(t-t0)/dur):1, e=1-Math.pow(1-k,3);
+    ring.style.setProperty("--p",(got/total)*e); num.textContent=Math.round(got*e);
+    if(k<1) requestAnimationFrame(step); else if(got/total>=.8||(nb&&best)) confetti(70); }
+  requestAnimationFrame(step); }
+document.addEventListener("click",function(ev){ var t=ev.target.closest("button");
+  if(!t){ if(ev.target.closest("#gm-card")&&locked&&Date.now()-answeredAt>400) next(); return; }
+  if(t.id==="gm-start"||t.id==="gm-again-b") return start();
+  if(t.id==="gm-true") return answer(true);
+  if(t.id==="gm-trap") return answer(false);
+  if(t.id==="gm-next") return next(); });
+document.addEventListener("keydown",function(ev){ if($("#gm-play").hidden) return;
+  if(ev.key!=="ArrowRight"&&ev.key!=="ArrowLeft") return; ev.preventDefault();
+  if(locked) next(); else answer(ev.key==="ArrowRight"); });
+/* swipe: right is true, left is a trap; the stamp fades in as the card goes */
+var x0=null;
+card.addEventListener("pointerdown",function(e){ if(locked) return; x0=e.clientX; card.setPointerCapture(e.pointerId); card.classList.remove("enter"); });
+card.addEventListener("pointermove",function(e){ if(x0===null) return; var dx=e.clientX-x0;
+  card.style.transform="translateX("+dx+"px) rotate("+dx/28+"deg)";
+  stamps(Math.max(0,Math.min(1,dx/80)),Math.max(0,Math.min(1,-dx/80))); });
+function release(e){ if(x0===null) return; var dx=e.clientX-x0; x0=null; card.style.transform=""; stamps("","");
+  if(Math.abs(dx)>70) answer(dx>0); }
+card.addEventListener("pointerup",release);
+card.addEventListener("pointercancel",function(){ x0=null; card.style.transform=""; stamps("",""); });
+var b=bestGet(); if(b){ var ib=$("#gm-intro-best"); ib.hidden=false;
+  ib.lastChild.textContent=U.best.replace("{b}",b+" / "+Math.min(D.round,D.items.length)); }
+})();
+</script><script>
+(function(){var THEME_KEY="patandfam.theme";
+/* older visits kept the choice in the TB module's record; it counts until the student chooses again */
+function pref(){ try{ return localStorage.getItem(THEME_KEY)||(JSON.parse(localStorage.getItem("patandfam.tb.v1")||"{}")||{}).theme||null; }catch(e){ return null; } }
+function dark(){var t=document.documentElement.getAttribute("data-theme");
+  return t?t==="dark":!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);}
+function set(t){if(t)document.documentElement.setAttribute("data-theme",t);
+  else document.documentElement.removeAttribute("data-theme");
+  var b=document.getElementById("themeb");if(b){var d=dark();b.setAttribute("aria-checked",d?"true":"false");}}
+set(pref());
+document.getElementById("themeb").addEventListener("click",function(){
+  var t=dark()?"light":"dark";set(t); try{ localStorage.setItem(THEME_KEY,t); }catch(e){} });
+})();
+</script></body></html>
