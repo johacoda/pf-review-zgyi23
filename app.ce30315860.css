@@ -161,7 +161,7 @@
 }
 /* thumbs need bigger targets than a mouse pointer */
 @media (pointer:coarse){:root{--h-sm:36px; --h-md:44px}}
-@font-face{font-family:"Inter var";src:url(/fonts/inter.e379f284.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Inter var";src:url(fonts/inter.e379f284.woff2) format("woff2");font-weight:100 900;font-display:swap}
 /* until Inter arrives, the phone's own sans set to Inter's size and line height, so nothing moves when it swaps in */
 @font-face{font-family:"Inter fallback";src:local("Arial"),local("Roboto"),local("Helvetica");size-adjust:107.4%;ascent-override:90.2%;descent-override:22.5%;line-gap-override:0%}
 html{-webkit-text-size-adjust:100%; text-rendering:optimizeLegibility}
